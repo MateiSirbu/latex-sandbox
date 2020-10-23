@@ -1,0 +1,37 @@
+\documentclass[9pt,a4paper]{article}
+\usepackage{amsfonts,amsmath,amsthm,indentfirst}
+\usepackage[utf8x]{inputenc}
+\renewcommand{\labelitemi}{\textbullet}
+\renewcommand{\labelitemii}{\textbullet}
+
+\begin{document}
+
+Ca și în cazul algoritmilor greedy, soluția optimă nu este în mod necesar unică.
+Dezvoltarea unui algoritm de programare dinamică poate fi descrisă de următoarea succesiune de pași:
+
+\begin{itemize}
+    \item Se caracterizează structura unei soluții optime
+    \item Se definește recursiv valoarea unei soluții optime
+    \item Se calculează de jos în sus valoarea unei soluții optime
+    \newline Dacă pe lângă valoarea unei soluții optime se dorește și soluția 
+    propriu-zisă atunci se mai efectuează și acest pas:
+    \begin{itemize}
+        \item Din informațiile calculate se construiește de sus în jos o soluție optimă.
+    \end{itemize}
+\end{itemize}
+
+Să ne imaginăm o competiție în care doi jucători $A, B$ joacă o serie de cel mult $2n - 1$ partide, câștigător
+fiind jucătorul care acumulează primul $n$ victorii. Presupunem că nu există partide egale, și că rezultatele sunt
+independente între ele și că pentru orice partidă există o probabilitate $p$ ca jucătorul $A$ să câștige,
+și o probabilitate $1 - p$ ca jucătorul B să câștige.
+
+Ne propunem să calculăm $P(i,j)$, probabilitatea ca jucătorul $A$ să câștige competiția, dat fiind că mai are nevoie
+de $i$ victorii, iar jucătorul $B$ mai are nevoie de $j$ victorii pentru a câștiga. La început evident, probabilitatea
+este $P(n,n)$ pentru că fiecare jucător mai are nevoie de $n$ victorii.
+
+Pentru $1 \leq i \leq n$ avem $P(0, i) = 1$ implică $P(i, 0) = 0$. Probabilitatea $P(0,0)$ este nedefinită.
+
+Pentru $i, j \geq 1$ se poate calcula $P(i, j)$ după formula:
+$$P(i,j) = pP(i-1,j) + qP(i,j-1)$$
+
+\end{document}

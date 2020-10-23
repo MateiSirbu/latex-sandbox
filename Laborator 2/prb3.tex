@@ -1,0 +1,113 @@
+\documentclass[9pt,a4paper]{article}
+\usepackage{amsfonts,amsmath,amsthm}
+\usepackage[utf8x]{inputenc}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage[table]{xcolor}
+
+\title{\bf Exemple de tabele}
+\author{Sîrbu Matei-Dan}
+\date{22 octombrie 2020}
+
+\begin{document}
+\maketitle
+
+\section*{Tabel 1}
+
+\begin{minipage}{10cm}
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \multirow{4}{*}{Sisteme de formatare\footnote{Toate sistemele listate se bazează pe comenzi}} & Scribe       & VMS, UNIX        \\
+        \cline{2-3}                                                                                   & \TeX         & VMS, UNIX        \\
+        \cline{2-3}                                                                                   & \LaTeX       & VMS, UNIX        \\
+        \cline{2-3}                                                                                   & troff        & UNIX             \\
+        \hline
+        \multirow{4}{*}{Sisteme de procesare\footnote{Toate sistemele listate se bazează pe meniuri}} & WordStar     & MSDOS            \\
+        \cline{2-3}                                                                                   & Word Perfect & MSDOS, Macintosh \\
+        \cline{2-3}                                                                                   & MS Word      & MSDOS, Macintosh \\
+        \cline{2-3}                                                                                   & MacWrite     & Macintosh        \\
+        \hline
+    \end{tabular}
+\end{minipage}
+
+\section*{Tabel 2}
+
+\begin{tabular}{lrr}
+    \hline
+    \multicolumn{2}{c}{\bf Articol} &                               \\
+    \cline{1-2}
+    \bf Animal                      & \bf Descriere & \bf Preț (\$) \\
+    \hline
+    Gnat                            & per gram      & 13.65         \\
+                                    & la bucată     & 0.01          \\
+    Gnu                             & la bax        & 92.50         \\
+    Emu                             & la bax        & 33.33         \\
+    Armadillo                       & congelat      & 8.99          \\
+    \hline
+\end{tabular}
+
+\section*{Tabel 3}
+
+\begin{tabular}{|c|c|c|}
+    \hline
+    \bf Cursuri     & \multicolumn{2}{c|}{\bf Tip}                             \\
+    \cline{2-3}
+    \bf Seminarii   & \multirow{2}{*}{Obligatoriu} & \multirow{2}{*}{Opțional} \\
+    \bf Laboratoare &                              &                           \\
+    \hline \hline
+    \bf Număr ore   & \multicolumn{2}{c|}{30}                                  \\ \hline
+\end{tabular}
+
+\section*{Tabel 4}
+
+\begin{tabular}{rcccr}
+    \hline
+    \rowcolor{yellow} & x        & y        & w        & z \\
+    \hline
+    variable1 \vline  & a \vline & b \vline & c \vline & d \\
+    variable2 \vline  & a \vline & b \vline & c \vline & d \\
+    \hline
+\end{tabular}
+
+\section*{Tabel 5}
+
+\begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+    \multicolumn{2}{|c|}{\cellcolor{yellow}} & \multicolumn{4}{c|}{\bf Rank} & \multirow{2}{*}{\bf Total}                        \\
+    \cline{3-6}
+    \multicolumn{2}{|c|}{\cellcolor{yellow}} & A                             & B                          & C  & Other &         \\
+    \hline
+    \multirow{2}{*}{\bf Type}                & type1                         & 10                         & 21 & 6     & 3  & 40 \\
+    \cline{2-7}
+                                             & type1                         & 10                         & 21 & 6     & 3  & 40 \\
+    \hline
+    \multicolumn{2}{|c|}{\bf Total}          & 18                            & 35                         & 11 & 5     & 69      \\
+
+    \hline
+\end{tabular}
+
+\section*{Tabel 6}
+
+\begin{tabular}{|l|c|l|}
+    \hline
+    \multicolumn{3}{|c|}{\bf Componența echipei}                               \\
+    \hline
+    \rowcolor{orange} \bf Portar                        & PT & Paul Robinson   \\
+    \hline
+    \multirow{4}{*}{\bf Fundași}                        & FS & Lucus Radebe    \\
+                                                        & FC & Michael Dubbery \\
+                                                        & FC & Dominic Matteo  \\
+                                                        & FD & Didier Domi     \\
+    \hline
+    \rowcolor{gray}                                     & MC & David Batty     \\
+    \rowcolor{gray} \multicolumn{1}{|c|}{\bf Mijlocași} & MC & Eirik Bakke     \\
+    \rowcolor{gray}                                     & MC & Jody Morris     \\
+    \hline
+    \bf Înaintași                                       & IN & Jamie McMaster  \\
+    \hline
+    \multirow{2}{*}{\bf Om de gol}                      & OG & Alan Smith      \\
+                                                        & OG & Mark Viduca     \\
+    \hline
+\end{tabular}
+
+\end{document}

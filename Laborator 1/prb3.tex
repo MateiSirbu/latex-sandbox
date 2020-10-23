@@ -1,0 +1,112 @@
+\documentclass[9pt,a4paper]{article}
+\usepackage{amsfonts,amsmath,amsthm,indentfirst}
+\usepackage[utf8x]{inputenc}
+
+\title{\bf Exemple de tabele}
+\author{Sîrbu Matei-Dan}
+\date{15 octombrie 2020}
+
+\begin{document}
+\maketitle
+
+\section*{Tabelul 1}
+
+\begin{verbatim}
+    \begin{tabular}{|r|l|c|}
+        \hline\hline
+        Nr.crt   & Nume    & Ocupația \\
+        \hline\hline
+        1.       & Popescu & Inginer  \\
+        \hline2. & Ionescu & Profesor \\
+        \hline3. & Andrei  & Șomer    \\
+        \hline
+    \end{tabular}
+\end{verbatim}
+
+\begin{tabular}{|r|l|c|}
+    \hline\hline
+    Nr.crt   & Nume    & Ocupația \\
+    \hline\hline
+    1.       & Popescu & Inginer  \\
+    \hline2. & Ionescu & Profesor \\
+    \hline3. & Andrei  & Șomer    \\
+    \hline
+\end{tabular}
+
+\section*{Tabelul 2}
+
+\begin{verbatim}
+    \begin{tabular}{|l l c|}
+        \hline
+        Nr.crt&Nume& Ocupația\\
+        1. & Popescu & Inginer \\
+        2. & Ionescu & Profesor \\
+        3. & Andrei & Șomer \\
+        \hline
+    \end{tabular}
+\end{verbatim}
+
+\begin{tabular}{|l l c|}
+    \hline
+    Nr.crt & Nume    & Ocupația \\
+    1.     & Popescu & Inginer  \\
+    2.     & Ionescu & Profesor \\
+    3.     & Andrei  & Șomer    \\
+    \hline
+\end{tabular}
+
+\pagebreak
+
+\section*{Tabelul 3}
+
+\begin{verbatim}
+    \begin{tabular}{|p{4cm}|}
+        \hline
+        Acesta este exemplu
+        de paragraf scris
+        \^\i n cutie. \\
+        \hline
+    \end{tabular}
+\end{verbatim}
+
+\begin{tabular}{|p{4cm}|}
+    \hline
+    Acesta este exemplu
+    de paragraf scris
+    \^\i n cutie. \\
+    \hline
+\end{tabular}
+
+\section*{Tabelul 4}
+
+\begin{verbatim}
+    \hline\hline
+    \multicolumn{2}{|c|}{Denumirea} & Cant.   &
+    \multicolumn{2}{c|}{Preț (mii lei)}                              \\
+    \cline{4-5}
+    \multicolumn{2}{|c|}{}          &         & unitar & total       \\
+    \hline\hline
+    \multicolumn{2}{|c|}{Roșii}     & 3 Kg    & 0,3    & 0,9         \\
+    \hline
+    Carne                           & Cal. I  & 2 Kg   & 4     & 8   \\
+    \cline{2-5}
+                                    & Cal. II & 3 Kg   & 2,5   & 7,5 \\
+    \hline\hline
+\end{verbatim}
+
+\begin{tabular}{|c|c|c|r|r|}
+    \hline\hline
+    \multicolumn{2}{|c|}{Denumirea} & Cant.   &
+    \multicolumn{2}{c|}{Preț (mii lei)}                              \\
+    \cline{4-5}
+    \multicolumn{2}{|c|}{}          &         & unitar & total       \\
+    \hline\hline
+    \multicolumn{2}{|c|}{Roșii}     & 3 Kg    & 0,3    & 0,9         \\
+    \hline
+    Carne                           & Cal. I  & 2 Kg   & 4     & 8   \\
+    \cline{2-5}
+                                    & Cal. II & 3 Kg   & 2,5   & 7,5 \\
+    \hline\hline
+\end{tabular}
+
+\end{document}

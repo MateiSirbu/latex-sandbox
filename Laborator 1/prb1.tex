@@ -1,0 +1,57 @@
+\documentclass[9pt,a4paper]{article}
+\usepackage{amsfonts,amsmath,amsthm}
+\usepackage[utf8x]{inputenc}
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Propoziția}
+\renewcommand{\proofname}{Demonstrație}
+
+\title{\bf Primul meu document în \LaTeX{}}
+
+\author{Sîrbu Matei-Dan}
+
+\date{15 octombrie 2020}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+    Acesta este primul meu document scris în \LaTeX{}.
+\end{abstract}
+
+\section{Introducere}
+    În continuare vom argumenta de ce \LaTeX{} este indicat pentru redactarea textelor și a formulelor matematice.
+
+\begin{itemize}
+    \item este un program stabil pe diverse platforme;
+    \item aduce noi îmbunătățiri în ce privește calitatea și ușurința de redactare, cât și o afișare profesională.
+\end{itemize}
+
+\section{Rezultate utilizate în document}
+
+Acest document folosește următoarele rezultate teoretice:
+\begin{teorema}\label{pitagora}
+    Dacă în triunghiul $\triangle ABC$ unghiul $\hat A$ este un unghi drept, atunci $$BC^2=AB^2+AC^2.$$
+\end{teorema}
+
+\begin{prop}
+    Teorema \ref{pitagora} este valabilă doar în spații euclidiene.
+\end{prop}
+
+Textul matematic se introduce prin inserarea de dolar în ambele capete astfel:
+$\frac{\pi}{4}=\sum_{k-1}^{\infty}\frac{(-1)^{k+1}}{2k-1}$.
+
+Dacă se dorește afișarea ecuației pe următorul rând centrată se folosește dublu dolar în ambele capete astfel:
+
+$$\frac{\pi}{4}=\sum_{k=1}^{\infty}\frac{(-1)^{k+1}}{2k-1}$$
+
+Dacă dorim să numerotăm ecuația folosim mediul:
+
+\begin{equation}\label{eq1}
+    g(x)=\int_{0}^{\pi}\sin(x)dx
+\end{equation}
+
+\section{Concluzii}
+
+Cu ajutorul unui număr mic de comenzi, ușor de înțeles putem realiza un document având o calitate tipografică deosebită.
+
+\end{document}
