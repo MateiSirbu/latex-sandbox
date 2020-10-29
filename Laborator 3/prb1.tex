@@ -1,0 +1,100 @@
+\documentclass[9pt,a4paper]{article}
+\usepackage{amsfonts,amsmath,amsthm,indentfirst,fancyvrb,alltt}
+\usepackage[utf8x]{inputenc}
+\usepackage[table]{xcolor}
+\renewcommand\refname{Bibliografie}
+
+\title{\bf Laborator 3}
+\author{Sîrbu Matei-Dan}
+\date{29 octombrie 2020}
+
+\begin{document}
+\maketitle
+
+\section{Texturi și imagini color}
+
+Domeniul ,,nativ'' al aplicațiilor CUDA este procesarea imaginilor.\cite{andonie} Acest domeniu depășește cadrul laboratorului; ne vom rezuma doar la câteva example cu rol introductiv. Scopul acestei lucrări este de a prezenta câteva exemple mai complexe de programe CUDA, exemplificând în mod special procesarea cu texturi și imagini.
+
+\subsection{Procesarea texturilor}
+Un termen împrumutat din grafica 3D -- textura -- poate fi considerată o matrice uni-, bi- sau tri-dimensională de \textit{texeli} (texture-elements). Texelii pot fi reprezentați prin scalari (byte, float), sau 4-tuple (byte4, float4).
+
+În CUDA, texturile se disting ca o zonă de memorie specială, care poate fi citită cu ajutorul unor funcții de acces speciale \texttt{tex1D(x), tex2D(x, y)}, respectiv \texttt{tex3D(x, y, z)}. Texturile oferă următoarele facilități:
+
+\begin{itemize}
+    \item pentru dispozitivele mai vechi, citirea din memoria de textură este mai  rapidă decât accesul din memoria globală dispozitiv\footnote{Arhitectura CUDA 2.x (Fermi) oferă memorie cache și memoriei globale},
+    \item se pot citi și elemente de la coordonate ne-întregi, interpolarea (lineară) a valorilor efectuându-se de către hardware (de ex: \texttt{float a = tex2D(1.5, 3.25) }),
+    \item coordonatele care depășesc domeniul texturii $[0\dots N-1]$ se ajustează automat, fie forțându-șe la marginile domeniilor $0, N-1$ fie calculând modulo $N$, configurabil, 
+\end{itemize}
+
+\newpage
+
+\section*{Primul program CUDA}
+
+Scopul acestui exemplu este de a ne familiariza cu mediul CUDA, compilarea unui program, lucrul cu memoria dispozitiv, modelul de execuție multi-threaded divizat în blocuri.
+
+În loc de tradiționalul \textit{"Hello World"}, primul exemplu va consta din stocarea în memorie a șirului de întregi 0, 1, 2, \dots\  N-1, echivalentul paralel al următorului cod C:
+\begin{Verbatim}[xleftmargin=.5in]
+for(i=0; i<N; i++)
+        a[i]=i;
+\end{Verbatim}
+Chiar și pentru acest banal exemplu, este nevoie de următorii pași:
+\begin{enumerate}
+    \item alocarea memoriei pe dispozitiv și gazdă (pointerii a\_cpu, respectiv a\_gpu)
+    \item apelul CUDA: Lansarea a $N$ threaduri. Fiecare thread are asociat un indice unic, intrinsec, de la $0$ la $N-1$. Pseudo-codul este:
+\begin{Verbatim}
+Thread(i) executa:
+    a[i]=i;
+terminare
+\end{Verbatim}
+\item așteptarea terminării tuturor threadurilor
+\item copierea rezultatului din memoria dispizitiv în memoria gazdă\footnote{Copierea are loc, de obicei pe magistrala pe care se află placa video, iar viteza acestuia limitând performanța sistemului, se caută minimizarea numărului de transferuri.}
+\item afișarea șirului rezultat.
+\end{enumerate}
+În pașii 2-3, execuția se desfășoară pe procesorul grafic, iar procesorul gazdă așteaptă rezultatele în procedura \texttt{cudaThreadSynchronize()}. În continuare vom prezenta codul unei posibile implementări CUDA, folosind un vector de threaduri.
+% === VARIANTA FĂRĂ ALLTT ===
+% \begin{Verbatim}[commandchars=\\~&]
+% \textit~// Codul care va rula pe GPU&
+% __global__ void threadScriere(int * a, int n) {
+%         \textit~// indicele threadului&
+%         int i = blockDim.x * blockIdx.x + threadIdx.x;
+%         if (i < n)
+%                 a[i] = i;
+% }
+% \textit~// functia main() din C standard, se executa pe CPU&
+% int main(int argc, char ** argv) {
+%     int n = 1024; \textit~// dimensiune&
+%     int *a_cpu;   \textit~// pointer la memoria gazda&
+% }
+% \end{Verbatim}
+% === VARIANTA CU ALLTT ===
+\begin{alltt}
+{\it \texttt{// Codul care va rula pe GPU}}
+__global__ void threadScriere(int * a, int n) {\{}
+        {\it \texttt{// indicele threadului}}
+        int i = blockDim.x * blockIdx.x + threadIdx.x;
+        if (i < n)
+                a[i] = i;
+{\}}
+{\it \texttt{// functia main() din C standard, se executa pe CPU}}
+int main(int argc, char ** argv) {\{}
+    int n = 1024; {\it \texttt{// dimensiune}}
+    int *a_cpu;   {\it \texttt{// pointer la memoria gazda}}
+\end{alltt}
+
+Etapele unui program care folosește CUDA sunt, de obicei:
+\begin{enumerate}
+    \item alocarea memoriei pe dispozitiv,
+    \item copierea datelor de intrare din memoria gazdă în memoria dispozitiv,
+    \item apel nucleu CUDA: lansarea unei grile de threaduri,
+    \item calcul pe dispozitivul GPU
+    \item sincronizarea gazdă-dispozitiv prin așteptarea terminării execuției tuturor threadurilor,
+    \item preluarea rezultatului din memoria dispozitiv.
+\end{enumerate}
+
+Pașii 1-3,5-6 sunt executate de către calculatorul gazdă, iar 4 este executat de  procesorul grafic. În acest timp, procesorul gazdă (CPU) este inactiv, sau poate fi programat pentru alte activități. Astfel, putem considera GPU ca un \textit{ co-procesor} care poate prelua secțiunile de calcul intensiv din program.
+
+\begin{thebibliography}{99}
+    \bibitem{andonie}Răzvan Andonie, Angel Cațaron, Honorius Gâlmeanu, Zoltan Gaspar, Lorentz Istvan, Mihai Ivanovici, Lucian Sasu, \textit{Algoritmi și structuri de date, Îndrumar de laborator}, Universitatea ,,Transilvania'' din Brașov, 2012
+\end{thebibliography}
+
+\end{document}
