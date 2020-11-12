@@ -1,0 +1,127 @@
+\documentclass[9pt,a4paper]{article}
+\usepackage{amsfonts,amsmath,amsthm,xpatch}
+\usepackage[utf8x]{inputenc}
+\renewcommand\refname{Bibliografie}
+\newtheorem*{definitie}{Definiția}
+\makeatletter
+\xpatchcmd{\@thm}{\thm@headpunct{.}}{\thm@headpunct{:}}{}{}
+\makeatother
+
+\title{\bf Laborator 4}
+\author{Sîrbu Matei-Dan}
+\date{5 noiembrie 2020}
+
+\begin{document}
+\maketitle
+
+\section*{Repartiția binomială $\mathbf{B}_i(\mathbf{n;p})$}
+
+\begin{definitie}O variabilă aleatoare X are o repartiție binomială de parametrii n și p, dacă repartiția sa are forma:
+\end{definitie}
+$$X\begin{pmatrix}
+    k \\ C_n^k p^k q^{n-k} 
+\end{pmatrix}_{\substack{k=\overline{0,n} \\ n \in \mathbb{N}}}, p \geq 0, p + q = 1$$
+Avem
+    $$p_{n, k} = C_n^k p^k q^{n-k} \geq 0, k = \overline{0, n} \text{ și } \sum_{k=0}^n {p_{n,k}} = \sum_{k=0}^n{C_n^k p^k q^{n-k}} = (p + q)^n = 1.$$ 
+
+\textbf{\textit{Funcția de repartiție}} a variabilei aleatoare X binomiale este:
+    $$F(x) = P(X < x) = \sum_{k=0}^{[x]-1}{p_{n,k},\ [x] \text{ fiind partea întreagă a lui X.}}$$
+
+\textbf{\textit{Funcția caracteristică}} corespunzătoare repartiției binomiale este:
+\begin{align*}
+&\varphi(t) = M(e^{itx}) = \sum_{k=0}^n{C_n^k e^{itk} p^k q^{n-k}} = \sum_{k=0}^n{C_n^k (e^{it} \cdot p)^k q^{n-k}} \\ 
+&\varphi(t) = (pe^{it} + q)^n.
+\end{align*}
+
+\textbf{\textit{Media}} variabilei aleatoare $X$ binomiale este:
+$$M(X) = np.$$
+
+\textbf{\textit{Dispersia}} variabilei aleatoare $X$ binomiale este:
+$$D^2(X) = npq.$$
+
+\textbf{\textit{Abaterea pătratică medie}} a variabilei aleatoare $X$ binomiale este:
+
+$$\sigma(X) = \sqrt{D^2(X)} = \sqrt{npq}.$$
+
+\newpage
+
+\section*{Repartiția uniformă continuă}
+\begin{definitie}
+O variabilă aleatoare X are o repartiție uniformă continuă de parametrii a și b, dacă densitatea sa de repartiție este:
+\end{definitie}
+$$\rho(x) = 
+\begin{cases}
+    \dfrac{1}{b - a}, &x \in [a, b], 0 \leq a \leq b \\ 0, &x \notin [a, b]
+\end{cases}.$$
+
+Avem $$\int_{-\infty}^{\infty} \rho (x) \mathop{dx} = 1.$$
+
+\textbf{\textit{Media}} variabilei aleatoare $X$ cu repartiție uniformă de parametrii $a$ și $b$ este:
+
+$$M(x) = \frac{a+b}{2}.$$
+
+\textbf{\textit{Dispersia}} variabilei aleatoare $X$ cu repartiția uniformă de parametrii a și b este:
+
+$$D^2(x) = \frac{(a-b)^2}{12}.$$
+
+\textbf{\textit{Funcția de repartiție}} a variabilei aleatoare $X$ cu repartiția uniformă de parametrii $a$ și $b$ este:
+
+$$F(x) = \int_{-\infty}^x \rho(t) \mathop{dt} = 
+\begin{cases}
+    0, &x \leq a \\ \dfrac{x-a}{b-a}, &a \leq x \leq b \\ 1, &x > b
+\end{cases}.$$
+
+\textbf{\textit{Funcția caracteristică}} a variabilei aleatoare $X$ cu repartiția uniformă de parametrii $a$ și $b$ este:
+
+$$\varphi(t) = 
+\begin{cases}
+    \dfrac{1}{it(b-a)}(e^{itb} - e^{ita}), &t \neq 0 \\ 1, &t = 0
+\end{cases}.$$
+
+\newpage
+
+\section*{Sisteme de ecuații liniare}
+
+Un ansamblu de egalități de forma:
+
+\begin{equation} \label{eq:sistem}
+    \begin{cases}
+        a_{11}x_{1} + a_{12}x_2 + \dots + a_{1n}x_{n} = b_1 \\
+        a_{21}x_{1} + a_{22}x_2 + \dots + a_{2n}x_{n} = b_2 \\
+        \dotfill \\
+        a_{m1}x_{1} + a_{m2}x_2 + \dots + a_{mn}x_{n} = b_m
+    \end{cases}
+\end{equation}
+se numește \textit{sistem de m ecuații liniare cu n necunoscute} $x_1, x_2, \dots, x_n$.
+
+Elementele $a_{ij}, i = \overline{1, m}, j = \overline{1, n}, a_{ij} \in \mathbb{R}$ se numesc \textit{coeficienți}, iar elementele $b_i \in \mathbb{R}, i = \overline{1,m}$ se numesc \textit{termeni liberi}.
+
+Sistemul \eqref{eq:sistem} poate fi scris și sub formă matriceală:
+
+$$A \cdot X = B \text{ sau } \sum_{j=1}^n a_{ij}x_j = b_i, i = \overline{1, m}$$
+
+$$A = 
+\begin{pmatrix}
+    a_{11} & \dots & a_{1n} \\ 
+    \dots & \dots & \dots \\ 
+    a_{m1} & \dots & a_{mn}
+\end{pmatrix}, 
+B = \begin{pmatrix}
+    b_1 \\ b_2 \\ \dots \\ b_m
+\end{pmatrix}, 
+X = \begin{pmatrix}
+    x_1 \\ x_2 \\ \dots \\ x_n
+\end{pmatrix}
+$$
+
+Matricea extinsă a sistemului \eqref{eq:sistem} este:
+
+$$ \bar{A} = 
+\begin{pmatrix}
+    a_{11} & \dots & a_{1n} & b_1 \\ 
+    \dots & \dots & \dots & \dots \\ 
+    a_{m1} & \dots & a_{mn} & b_m
+\end{pmatrix}
+$$
+
+\end{document}
