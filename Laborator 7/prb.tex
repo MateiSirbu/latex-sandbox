@@ -1,11 +1,12 @@
 \documentclass[9pt,a4paper]{article}
 \usepackage{amsfonts,amsmath,amsthm,amssymb}
 \usepackage{graphicx,graphics,tikz,indentfirst,multirow}
-\usepackage{algorithm,algorithmicx,algpseudocode}
+\usepackage{algorithm,algorithmicx,algpseudocode,xcolor}
 \usepackage[utf8x]{inputenc}
 \renewcommand\figurename{Figura}
 \algblockdefx{RepeatFărăWhile}{EndRepeat}{\textbf{repeat }}{}
 \algnotext{EndRepeat}
+\definecolor{black}{RGB}{0,0,0}
 
 \title{\bf Laborator 7}
 \author{Sîrbu Matei-Dan}
@@ -17,7 +18,7 @@
 \section*{Exercițiul 1}
 \subsection*{Breviar teoretic}
 
-Fie $G$ un graf orientat. $G$ este un \textit{arbore cu rădăcina r}, dacă există $G$ un vârf $r$ din care oricare alt vârf poate fi ajuns printr-un drum unic.
+{\color{black}Fie $G$ un graf orientat. $G$ este un \textit{arbore cu rădăcina r}, dacă există $G$ un vârf $r$ din care oricare alt vârf poate fi ajuns printr-un drum unic.
 
 Definiția este valabilă și pentru cazul unui graf neorientat, alegerea unei rădăcini fiind însă în acest caz arbitrară: orice arbore este un arbore cu rădăcină, iar rădăcina poate fi fixată în oricare vârf al său. Aceasta, deoarece dintr-un vârf oarecare se poate ajunge în orice alt vârf printr-un drum unic.
 
@@ -62,7 +63,7 @@ Definiția este valabilă și pentru cazul unui graf neorientat, alegerea unei r
 \end{figure}
 
 Când nu va fi pericol de confuzie, vom folosi termenul ,,arbore'', în loc de termenul corect ,,arbore cu rădăcină''. Cel mai intuitiv este să reprezentăm un arbore cu rădăcină, ca pe un arbore propriu-zis. În figura \ref{fig:arbore}, vom spune că \textit{beta} este \textit{tatăl} lui \textit{delta} și fiul lui
-\textit{alpha}, că \textit{beta} și \textit{gamma} sunt \textit{frați}, că \textit{delta} este un \textit{descendent} al lui \textit{alpha}, iar \textit{alpha} este un \textit{ascendent} al lui \textit{delta}.
+\textit{alpha}, că \textit{beta} și \textit{gamma} sunt \textit{frați}, că \textit{delta} este un \textit{descendent} al lui \textit{alpha}, iar \textit{alpha} este un \textit{ascendent} al lui \textit{delta}.}
 
 \newpage
 \section*{Exercițiul 2}
